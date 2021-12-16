@@ -1,5 +1,6 @@
 ﻿#pragma once
 #define MAPSIZE 8
+#define MENUNUM 4
 
 /**
 * 게임 시작메인메뉴를 출력
