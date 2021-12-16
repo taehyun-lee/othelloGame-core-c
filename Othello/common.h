@@ -7,3 +7,5 @@
 #include "logic.h"
 #include "print.h"
 #include "txtfile.h"
+
+extern int map[10][10];
