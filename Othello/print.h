@@ -24,7 +24,8 @@ void printStone()
 
 /**
 * 게임 종료 메시지 출력
-* @param _playtime : 총 플레이 시간, _p1_score : p1의 돌 개수, _p2_score : p2의 돌 개수
+* @param _playtime : 총 플레이 시간(s), _p1_score : p1의 돌 개수, _p2_score : p2의 돌 개수
+* 기록할 수 있는 최대 총 플레이 시간은 59m 59s
 */;
 void printEndMsg(int _playtime, int _p1_score, int _p2_score);
 

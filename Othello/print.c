@@ -156,7 +156,11 @@ void printEndMsg(int _playtime, int _p1_score, int _p2_score)
 	printf("%s", comment);
 	
 	gotoxy(base_x + 8, base_line + 8);
-	printf("playtime : %dm %ds", _playtime / 60, _playtime % 60);
+	if (_playtime >= 60 * 60) 
+		printf("playtime : %dm %ds", 59, 59);
+	else
+		printf("playtime : %dm %ds", _playtime / 60, _playtime % 60);
+
 
 	gotoxy(base_x + 8, base_line + 10);
 	printf("score : %d : %d", _p1_score, _p2_score);
