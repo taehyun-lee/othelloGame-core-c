@@ -13,32 +13,32 @@ void printMainmenu()
 	printf("<< O T H E L L O >>");
 
 	gotoxy(margin_left, base_line++);
-	printf("┌");
+	printf("┏");
 	for (i = 0; i < width; i++) {
-		printf("─");
+		printf("━");
 	}
-	printf("┐");
+	printf("┓");
 	int line[MENUNUM];
 	for (i = 0; i < MENUNUM; i++) {
 		for (j = 0; j < 5; j++) {
 			gotoxy(margin_left, base_line++);
-			printf("│");
+			printf("┃");
 			for (k = 0; k < width; k++)
 				printf(" ");
-			printf("│");
+			printf("┃");
 		}
 		line[i] = base_line - 3;
 		gotoxy(margin_left, base_line++);
-		printf("├");
+		printf("┣");
 		for (j = 0; j < width; j++)
-			printf("─");
-		printf("┤");
+			printf("━");
+		printf("┫");
 	}
 	gotoxy(margin_left, --base_line);
-	printf("└");
+	printf("┗");
 	for (int i = 0; i < width; i++)
-		printf("─");
-	printf("┘");
+		printf("━");
+	printf("┛");
 	
 	//printf("%d", line[0]);
 	gotoxy(margin_left + 13, line[0]);
@@ -66,30 +66,30 @@ void printMap()
 	int base_line = margin_top;
 
 	gotoxy(margin_left, base_line++);
-	printf("┌");
+	printf("┏");
 	for (i = 0; i < MAPSIZE; i++)
-		printf("───────┬");
-	printf("\b┐");
+		printf("━━━━━━━┳");
+	printf("\b┓");
 
 	for (i = 0; i < MAPSIZE; i++) {
 		for (j = 0; j < 3; j++) {
 			gotoxy(margin_left, base_line++);
-			printf("│");
+			printf("┃");
 			for (k = 0; k < MAPSIZE; k++)
-				printf("       │");
+				printf("       ┃");
 		}
 		gotoxy(margin_left, base_line++);
-		printf("├");
+		printf("┣");
 		for (j = 0; j < MAPSIZE; j++) {
-			printf("───────┼");
+			printf("━━━━━━━╋");
 		}
-		printf("\b┤");
+		printf("\b┫");
 	}
 	gotoxy(margin_left, --base_line);
-	printf("└");
+	printf("┗");
 	for (i = 0; i < MAPSIZE; i++)
-		printf("───────┴");
-	printf("\b┘");
+		printf("━━━━━━━┻");
+	printf("\b┛");
 }
 
 void gotoxy(int _x, int _y) {
