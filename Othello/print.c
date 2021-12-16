@@ -40,7 +40,6 @@ void printMainmenu()
 		printf("━");
 	printf("┛");
 	
-	//printf("%d", line[0]);
 	gotoxy(margin_left + 13, line[0]);
 	printf("N E W   G A M E");
 
@@ -53,16 +52,14 @@ void printMainmenu()
 	gotoxy(margin_left + 13, line[3]);
 	printf("    E X I T");
 
-	gotoxy(0, 40);
+	gotoxy(0, 45);
 }
 
 void printMap()
 {
 	int i, j, k;
 	int margin_top = 8;
-	int margin_bottom = 9;
 	int margin_left = 17;
-	int margin_right = 18;
 	int base_line = margin_top;
 
 	gotoxy(margin_left, base_line++);
@@ -90,11 +87,32 @@ void printMap()
 	for (i = 0; i < MAPSIZE; i++)
 		printf("━━━━━━━┻");
 	printf("\b┛");
+
+	gotoxy(0, 45);
 }
 
 void printStone()
 {
+	int base_x = 21;
+	int base_y = 10;
+	int dx = 8;
+	int dy = 4;
+	int i, j;
 
+	for (i = 0; i < MAPSIZE; i++) {
+		for (j = 0; j < MAPSIZE; j++) {
+			gotoxy(base_x + j * dx, base_y + i * dy);
+			if (map[i + 1][j + 1] == 1)
+				printf("●");
+			else if (map[i + 1][j + 1] == 2)
+				printf("○");
+			else if (map[i + 1][j + 1] == 0)
+				continue;
+			else
+				printf("＃");  //  avoid case
+		}
+	}
+	gotoxy(0, 45);
 }
 
 void gotoxy(int _x, int _y) {
