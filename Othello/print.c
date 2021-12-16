@@ -3,11 +3,11 @@
 
 void printMainmenu()
 {
-	int i, j, k;
 	int width = 38;
 	int margin_left = 30;
 	int margin_top = 10;
 	int base_line = margin_top;
+	int i, j, k;
 
 	gotoxy(margin_left + 10, margin_top - 2);
 	printf("<< O T H E L L O >>");
@@ -57,10 +57,10 @@ void printMainmenu()
 
 void printMap()
 {
-	int i, j, k;
 	int margin_top = 8;
 	int margin_left = 17;
 	int base_line = margin_top;
+	int i, j, k;
 
 	gotoxy(margin_left, base_line++);
 	printf("┏");
@@ -112,6 +112,55 @@ void printStone()
 				printf("＃");  //  avoid case
 		}
 	}
+	gotoxy(0, 45);
+}
+
+void printEndMsg(int _playtime, int _p1_score, int _p2_score)
+{
+	int base_x = 35;
+	int base_y = 18;
+	int base_line = base_y;
+	int width = 30, height = 15;
+	int i, j;
+
+	for (i = 0; i < height; i++) {
+		gotoxy(base_x, base_line++);
+		for (j = 0; j < width; j++)
+			printf(" ");
+	}
+	base_line = base_y;
+	
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+	gotoxy(base_x, base_line++);
+	printf("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+	
+	for (i = 0; i < height - 2; i++) {
+		gotoxy(base_x, base_line++);
+		printf("┃                            ┃");
+	}
+
+	gotoxy(base_x, base_line++);
+	printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	
+	char* comment;
+	if (_p1_score > _p2_score)
+		comment = "!!Black Win!!";
+	else if (_p1_score < _p2_score)
+		comment = "!!White win!!";
+	else
+		comment = "~~~~~Draw~~~~";
+
+	base_line = base_y;
+	gotoxy(base_x + 8, base_line + 4);
+	printf("%s", comment);
+	
+	gotoxy(base_x + 8, base_line + 8);
+	printf("playtime : %dm %ds", _playtime / 60, _playtime % 60);
+
+	gotoxy(base_x + 8, base_line + 10);
+	printf("score : %d : %d", _p1_score, _p2_score);
+
 	gotoxy(0, 45);
 }
 
