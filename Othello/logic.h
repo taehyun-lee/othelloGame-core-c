@@ -28,9 +28,9 @@ void turnStone(int _player);
 
 /*
 *	마우스입력을 받아 해당 xy값 반환하는 함수
-*	@parameter int* _x: 입력받은 마우스의 x값, int* _y: 입력받은 마우스의 y값
+*	@parameter int* _x: 입력받은 마우스의 x값, int* _y: 입력받은 마우스의 y값 time_t _start: 턴이 시작했을때의 시간값
 */
-void getXY(int* _x, int* _y);
+void getXY(int* _x, int* _y,time_t _start);
 
 
 /*
@@ -84,3 +84,8 @@ int whoseWin();
 *	@return
 */
 boolean getBackupInfo(int(*_map)[10]);
+
+/*
+*	클릭되었는지 확인하는 함수
+*/
+boolean isClick();
