@@ -102,11 +102,11 @@ void printStone()
 	for (i = 0; i < MAPSIZE; i++) {
 		for (j = 0; j < MAPSIZE; j++) {
 			gotoxy(base_x + j * dx, base_y + i * dy);
-			if (map[i + 1][j + 1] == 1)
+			if (g_map[i + 1][j + 1] == 1)
 				printf("●");
-			else if (map[i + 1][j + 1] == 2)
+			else if (g_map[i + 1][j + 1] == 2)
 				printf("○");
-			else if (map[i + 1][j + 1] == 0)
+			else if (g_map[i + 1][j + 1] == 0)
 				continue;
 			else
 				printf("＃");  //  avoid case
