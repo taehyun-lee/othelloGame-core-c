@@ -117,29 +117,29 @@ void printStone()
 
 void printEndMsg(int _playtime, int _p1_score, int _p2_score)
 {
-	int base_x = 35;
-	int base_y = 18;
-	int base_line = base_y;
+	int margin_top = 18;
+	int margin_left = 35;
+	int base_line = margin_top;
 	int width = 30, height = 15;
 	int i, j;
 
 	for (i = 0; i < height; i++) {
-		gotoxy(base_x, base_line++);
+		gotoxy(margin_left, base_line++);
 		for (j = 0; j < width; j++)
 			printf(" ");
 	}
-	base_line = base_y;
+	base_line = margin_top;
 	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
-	gotoxy(base_x, base_line++);
+	gotoxy(margin_left, base_line++);
 	printf("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 	
 	for (i = 0; i < height - 2; i++) {
-		gotoxy(base_x, base_line++);
+		gotoxy(margin_left, base_line++);
 		printf("┃                            ┃");
 	}
 
-	gotoxy(base_x, base_line++);
+	gotoxy(margin_left, base_line++);
 	printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 	
@@ -151,19 +151,60 @@ void printEndMsg(int _playtime, int _p1_score, int _p2_score)
 	else
 		comment = "~~~~~Draw~~~~";
 
-	base_line = base_y;
-	gotoxy(base_x + 8, base_line + 4);
+	base_line = margin_top;
+	gotoxy(margin_left + 8, base_line + 4);
 	printf("%s", comment);
 	
-	gotoxy(base_x + 8, base_line + 8);
+	gotoxy(margin_left + 8, base_line + 8);
 	if (_playtime >= 60 * 60) 
 		printf("playtime : %dm %ds", 59, 59);
 	else
 		printf("playtime : %dm %ds", _playtime / 60, _playtime % 60);
 
 
-	gotoxy(base_x + 8, base_line + 10);
+	gotoxy(margin_left + 8, base_line + 10);
 	printf("score : %d : %d", _p1_score, _p2_score);
+
+	gotoxy(0, 45);
+}
+
+void printSave()
+{
+	int margin_top = 14;
+	int margin_left = 29;
+	int base_line = margin_top, btn_base_line;
+	int width = 40, height = 20;
+	int i;
+
+	gotoxy(margin_left, base_line++);
+	printf("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+	for (i = 0; i < height - 2; i++) {
+		gotoxy(margin_left, base_line++);
+		printf("┃                                      ┃");
+	}
+	gotoxy(margin_left, base_line);
+	printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+
+	gotoxy(margin_left + 10, margin_top + 5);
+	printf("Do yout want to save");
+	gotoxy(margin_left + 10, margin_top + 7);
+	printf("the current game?");
+
+	btn_base_line = base_line - 7;
+	gotoxy(margin_left + 7, btn_base_line++);
+	printf("┏━━━━━━━━━┓");
+	gotoxy(margin_left + 7, btn_base_line++);
+	printf("┃   N  O  ┃");
+	gotoxy(margin_left + 7, btn_base_line++);
+	printf("┗━━━━━━━━━┛");
+	
+	btn_base_line = base_line - 7;
+	gotoxy(margin_left + 22, btn_base_line++);
+	printf("┏━━━━━━━━━┓");
+	gotoxy(margin_left + 22, btn_base_line++);
+	printf("┃  Y E S  ┃");
+	gotoxy(margin_left + 22, btn_base_line++);
+	printf("┗━━━━━━━━━┛");
 
 	gotoxy(0, 45);
 }
