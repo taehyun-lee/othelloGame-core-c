@@ -11,6 +11,7 @@ void printMainmenu();
 
 /**
 * 부가메뉴 출력(제한시간, 흑/백 스코어, 차례, 나가기버튼)
+* @param _black_turn: 현재 플레이어 턴 확인 변수(boolean) , _p1_score: p1의 현재 돌 개수  _p2_score: p2의 현재 돌 개수
 */
 void printSubmenu(boolean _black_turn, int _p1_score, int _p2_score);
 
@@ -41,3 +42,9 @@ void printSave();
 * @param _x : 이동할 x좌표, _y : 이동할 y좌표
 */
 void gotoxy(int _x, int _y);
+
+/**
+* 특정 돌을 색깔로 출력 
+* @param _a : 색깔로 칠할 돌의 행, _b : 색깔로 칠할 돌의 열
+*/
+void printSpecificStone(int _a, int _b);

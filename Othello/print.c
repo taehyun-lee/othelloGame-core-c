@@ -115,6 +115,22 @@ void printStone()
 	gotoxy(0, 45);
 }
 
+void printSpecificStone(int _a, int _b) {
+	int base_x = 13;
+	int base_y = 6;
+	int dx = 8;
+	int dy = 4;	
+
+	gotoxy(base_x + _b * dx, base_y + _a * dy);  // 배열의 인덱스 적용을 위해 뒤집기
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+	if (map[_a][_b] == 1)
+		printf("●");
+	else if (map[_a][_b] == 2)
+		printf("○");
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+}
+
+
 void printEndMsg(int _playtime, int _p1_score, int _p2_score)
 {
 	int margin_top = 18;
@@ -228,6 +244,7 @@ void printSubmenu(boolean _black_turn, int _p1_score, int _p2_score) {
 
 	gotoxy(0, 45);
 }
+
 
 void gotoxy(int _x, int _y) {
 	COORD pos = { _x, _y };
