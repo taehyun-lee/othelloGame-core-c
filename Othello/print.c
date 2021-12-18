@@ -209,6 +209,26 @@ void printSave()
 	gotoxy(0, 45);
 }
 
+void printSubmenu(boolean _black_turn, int _p1_score, int _p2_score) {
+	
+	int margin_left = 8;
+	int margin_top = 8;
+
+	gotoxy(margin_left, CONSOLE_HEIGHT / 2 ); // 흑 스코어 출력
+	printf("● %d",_p1_score);
+	
+	gotoxy(CONSOLE_WIDTH - margin_left, CONSOLE_HEIGHT / 2 ); // 백 스코어 출력
+	printf("○ %d",_p2_score);
+	
+	gotoxy(CONSOLE_WIDTH / 2 - 5, CONSOLE_HEIGHT - margin_top ); // 현재 진행중인 플레이어 출력
+		if (_black_turn)
+			printf("Black Turn");
+		else
+			printf("White Turn");
+
+	gotoxy(0, 45);
+}
+
 void gotoxy(int _x, int _y) {
 	COORD pos = { _x, _y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);

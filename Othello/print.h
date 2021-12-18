@@ -1,6 +1,8 @@
 ﻿#pragma once
 #define MAPSIZE 8
 #define MENUNUM 4
+#define CONSOLE_WIDTH 100
+#define CONSOLE_HEIGHT 50
 
 /**
 * 게임 시작메인메뉴를 출력
@@ -10,7 +12,7 @@ void printMainmenu();
 /**
 * 부가메뉴 출력(제한시간, 흑/백 스코어, 차례, 나가기버튼)
 */
-void printSubmenu();
+void printSubmenu(boolean _black_turn, int _p1_score, int _p2_score);
 
 /**
 * 오셀로의 판 출력
