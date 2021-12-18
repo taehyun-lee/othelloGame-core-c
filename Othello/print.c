@@ -52,7 +52,7 @@ void printMainmenu()
 	gotoxy(margin_left + 13, line[3]);
 	printf("    E X I T");
 
-	gotoxy(0, 45);
+	gotoxy(0, 45);	// 프로세스 종료 시 나오는 문구 처리를 위해 커서를 옮김
 }
 
 void printMap()
@@ -88,7 +88,7 @@ void printMap()
 		printf("━━━━━━━┻");
 	printf("\b┛");
 
-	gotoxy(0, 45);
+	gotoxy(0, 45);	// 프로세스 종료 시 나오는 문구 처리를 위해 커서를 옮김
 }
 
 void printStone()
@@ -112,7 +112,7 @@ void printStone()
 				printf("＃");  //  avoid case
 		}
 	}
-	gotoxy(0, 45);
+	gotoxy(0, 45);	// 프로세스 종료 시 나오는 문구 처리를 위해 커서를 옮김
 }
 
 void printSpecificStone(int _a, int _b) {
@@ -128,6 +128,8 @@ void printSpecificStone(int _a, int _b) {
 	else if (map[_a][_b] == 2)
 		printf("○");
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	
+	gotoxy(0, 45); // 프로세스 종료 시 나오는 문구 처리를 위해 커서를 옮김
 }
 
 
@@ -181,7 +183,7 @@ void printEndMsg(int _playtime, int _p1_score, int _p2_score)
 	gotoxy(margin_left + 8, base_line + 10);
 	printf("score : %d : %d", _p1_score, _p2_score);
 
-	gotoxy(0, 45);
+	gotoxy(0, 45);	// 프로세스 종료 시 나오는 문구 처리를 위해 커서를 옮김
 }
 
 void printSave()
@@ -222,7 +224,7 @@ void printSave()
 	gotoxy(margin_left + 22, btn_base_line++);
 	printf("┗━━━━━━━━━┛");
 
-	gotoxy(0, 45);
+	gotoxy(0, 45);	// 프로세스 종료 시 나오는 문구 처리를 위해 커서를 옮김
 }
 
 void printSubmenu(boolean _black_turn, int _p1_score, int _p2_score) {
@@ -242,11 +244,7 @@ void printSubmenu(boolean _black_turn, int _p1_score, int _p2_score) {
 		else
 			printf("White Turn");
 
-	gotoxy(0, 45);
+	gotoxy(0, 45);		// 프로세스 종료 시 나오는 문구 처리를 위해 커서를 옮김
 }
 
 
-void gotoxy(int _x, int _y) {
-	COORD pos = { _x, _y };
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
-}
