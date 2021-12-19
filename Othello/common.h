@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <Windows.h>
 #include <time.h>
+#include <stdbool.h>
 
 #include "game.h"
 #include "logic.h"
