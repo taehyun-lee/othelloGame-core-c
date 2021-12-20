@@ -8,10 +8,11 @@ void checkFile();
 /*
 * record.txt파일의 데이터를 가지고오는 함수
 * @param _record : 파일의 데이터를 저장되는 변수
+* @param _max_line : 읽어올 수 있는 최대 행의 개수
 * p1_score, p2_score, winner, playtime, date
 * @return 빈파일인 경우 false를 리턴 정보가 존재할 시 true를 리턴
 */
-bool getRecord(int(*_record)[5]);
+bool getRecord(int(*_record)[5], int _max_line);
 
 /*
 * record.txt파일에 데이터를 입력하는 함수

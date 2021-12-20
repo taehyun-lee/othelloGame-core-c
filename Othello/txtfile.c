@@ -11,7 +11,7 @@ void checkFile()
 	fclose(file_backup);
 }
 
-bool getRecord(int(*_record)[5])
+bool getRecord(int(*_record)[5], int _max_line)
 {
 	FILE* file;
 	char line[255];
@@ -26,18 +26,15 @@ bool getRecord(int(*_record)[5])
 			ptr = strtok(NULL, " ");
 		}
 		i++;
-		if (i >= 10) {
-			fclose(file);
-			return true;
-		}
+		if (i == _max_line)
+			break;
 	}
 
 	fclose(file);
-	if (i == 0) {
+	if (i == 0)
 		return false;
-	}
-
-	return true;
+	else
+		return true;
 }
 
 bool setRecord(int* _record, int _max_line)
@@ -56,7 +53,10 @@ bool setRecord(int* _record, int _max_line)
 		char tok[50];
 		itoa(_record[i], tok, 10);
 		strcat(target, tok);
-		strcat(target, " ");
+		if (i != 4)
+			strcat(target, " ");
+		else
+			strcat(target, "\n");
 	}
 
 	//  2차원 동적 배열 생성 및 초기화
@@ -85,7 +85,6 @@ bool setRecord(int* _record, int _max_line)
 
 	if (row < _max_line) {
 		fseek(file, 0, SEEK_END);
-		fputs("\n", file);
 		fputs(target, file);
 		fclose(file);
 	}
@@ -98,7 +97,6 @@ bool setRecord(int* _record, int _max_line)
 		for (i = 1; i < _max_line; i++) { // 기존 파일의 2번째 행부터 첫행에 출력
 			fputs(txt_info[i], file_re);
 		}
-		fputs("\n", file_re);
 		fputs(target, file_re);
 		fclose(file_re);
 	}
@@ -106,5 +104,52 @@ bool setRecord(int* _record, int _max_line)
 		free(txt_info[k]);
 	free(txt_info);
 	
+	return true;
+}
+
+bool getBackup(int(*_backup)[10])
+{
+	FILE* file;
+	char line[255];
+	file = fopen("backup.txt", "r");
+	int i = 0;
+
+	while (fgets(line, sizeof(line), file) != NULL) {
+		int j = 0;
+		char* ptr = strtok(line, " ");
+		while (ptr != NULL) {
+			_backup[i][j++] = atoi(ptr);
+			ptr = strtok(NULL, " ");
+		}
+		i++;
+	}
+
+	fclose(file);
+	if (i == 0)
+		return false;
+	else
+		return true;
+}
+
+bool setBackup(int(*_map)[10])
+{
+	FILE* file;
+	file = fopen("backup.txt", "w");
+	int i, j;
+	char tok[50];
+	if (file == NULL)
+		return false;
+
+	for (i = 0; i < 10; i++) {
+		for (j = 0; j < 10; j++) {
+			itoa(_map[i][j], tok, 10);
+			fputs(tok, file);
+			if (j != 9)
+				fputs(" ", file);
+			else
+				fputs("\n", file);
+		}
+	}
+	fclose(file);
 	return true;
 }
