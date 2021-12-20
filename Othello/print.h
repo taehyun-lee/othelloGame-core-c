@@ -48,3 +48,11 @@ void gotoxy(int _x, int _y);
 * @param _a : 색깔로 칠할 돌의 행, _b : 색깔로 칠할 돌의 열
 */
 void printSpecificStone(int _a, int _b);
+
+/*
+* 게임 기록 리스트 출력
+* @param _record : 출력할 레코드의 리스트
+* @param _n : 출력할 행의 개수
+* p1score p2score winner playtime date
+ */
+void printRecord(int(*_record)[5], int _n);

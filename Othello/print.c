@@ -247,4 +247,53 @@ void printSubmenu(boolean _black_turn, int _p1_score, int _p2_score) {
 	gotoxy(0, 45);		// 프로세스 종료 시 나오는 문구 처리를 위해 커서를 옮김
 }
 
+void printRecord(int(*_record)[5], int _n)
+{
+	int margin_left = 20;
+	int margin_top = 8;
+	int base_line = margin_top;
+	int i;
+
+	gotoxy(margin_left + 20, margin_top - 3);
+	printf("<<  R E C O R D  >>");
+
+	gotoxy(margin_left, base_line++);
+	printf("┏━━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━┓");
+	gotoxy(margin_left, base_line++);
+	printf("┃   No. ┃  P1  ┃  P2  ┃  winner  ┃  playtime  ┃   date   ┃");
+	gotoxy(margin_left, base_line++);
+	printf("┣━━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━┫");
+
+	for (i = 0; i < _n; i++) {
+		char* winner;
+		if (_record[i][2] == 1)
+			winner = "Black";
+		else if (_record[i][2] == 2)
+			winner = "White";
+		else if (_record[i][2] == -1)
+			winner = "Draw ";
+		else
+			winner = " --- ";
+
+		int min = _record[i][3] / 60;
+		int sec = _record[i][3] % 60;
+
+		gotoxy(margin_left, base_line++);
+		printf("┃   %2d. ┃  %2d  ┃  %2d  ┃   %s  ┃  %2dm %2ds   ┃  %06d  ┃", i + 1, _record[i][0], _record[i][1], winner, min, sec, _record[i][4]);
+		gotoxy(margin_left, base_line++);
+		printf("┣━━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━┫");
+	}
+	gotoxy(margin_left, --base_line);
+	printf("┗━━━━━━━┻━━━━━━┻━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━━━┻━━━━━━━━━━┛");
+
+	base_line = base_line + 2;
+	gotoxy(margin_left + 18, base_line++);
+	printf("┏━━━━━━━━━━━━━━━━━━━┓");
+	gotoxy(margin_left + 18, base_line++);
+	printf("┃     E  X  I  T    ┃");
+	gotoxy(margin_left + 18, base_line++);
+	printf("┗━━━━━━━━━━━━━━━━━━━┛");
+
+	gotoxy(0, 45);
+}
 
