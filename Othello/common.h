@@ -3,6 +3,9 @@
 #include <Windows.h>
 #include <time.h>
 #include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
+#include <crtdbg.h>
 
 #include "game.h"
 #include "logic.h"

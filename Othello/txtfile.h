@@ -16,10 +16,10 @@ bool getRecord(int(*_record)[5]);
 /*
 * record.txt파일에 데이터를 입력하는 함수
 * 최대 행 개수가 초과 될 경우 가장 과거의 레코드 삭제 후 업데이트
+* 반드시 _record는 길이가 5인 배열 주소이어야 한다
 * @param _record : 저장할 데이터
 * @param _max_line : 최대 행 개수
 * p1_score, p2_score, winner, playtime, date
-* @return 정상적으로 파일에 출력이 되었을 경우 true 리턴
 */
 bool setRecord(int* _record, int _max_line);
 

@@ -3,25 +3,11 @@
 int map[10][10];
 #define NUMBER 10
 int main() {
-
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	init();
-
-	//printMainmenu();
-
 	int record[NUMBER][5] = { 0 };
-
-	if (!getRecord(record)) {
-		printf("empty");
-	}
-	else {
-		for (int i = 0; i < NUMBER; i++) {
-			for (int j = 0; j < 5; j++) {
-				printf("%d\t", record[i][j]);
-			}
-			printf("\n");
-		}
-
-	}
+	int target[5] = { 99,11,1,800,211031 };
+	setRecord(target, NUMBER);
 
 	return 0;
 }
