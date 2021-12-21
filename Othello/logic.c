@@ -1,6 +1,4 @@
 ﻿#include "common.h"
-#include "logic.h"
-
 
 boolean isEndGame() {
 
@@ -45,4 +43,9 @@ boolean isBlackPos(int _x,int _y) {
 		if (nx < 0 || nx >= 3 || ny < 0 || ny >= 5) 
 			continue;
 	}
+}
+
+void gotoxy(int _x, int _y) {
+	COORD pos = { _x, _y };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }

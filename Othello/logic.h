@@ -89,3 +89,9 @@ boolean getBackupInfo(int(*_map)[10]);
 *	클릭되었는지 확인하는 함수
 */
 boolean isClick();
+
+/*
+* 커서를 X,Y 위치로 옮기는 함수
+* @parameter _x: 옮기고 싶은 x값 _y: 옮기고 싶은 y값
+*/
+void gotoxy(int _x, int _y);
