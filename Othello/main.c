@@ -1,26 +1,22 @@
 ﻿#include "common.h"
 
 int map[10][10];
-
+#define NUMBER 10
 int main() {
-	
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	init();
-
-	int x = 78;
-	int y = 10;
-
-	printMap();
-	gotoxy(x,y);
-	printf("*");
-
-	if (convertToIndex(&x, &y)) {
-		gotoxy(0, 45);
-		printf("i = %d , j = %d", x, y);
-	}
-	else {
-		gotoxy(0, 45);
-		printf("error");
-	}
+	int record[NUMBER][5] = { 0, };
+	int testmap[10][10] = { {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+{-1, 1 ,1, 0, 2, 0, 1, 0, 1, -1},
+{-1, 1, 0, 2, 1, 2, 0, 1, 2 ,-1},
+{-1, 1, 2, 2, 1, 1, 0, 0, 1 ,-1},
+{-1, 1, 2, 1, 2, 0, 0, 2, 1 ,-1},
+{-1, 1, 1, 0, 2, 0, 1, 0, 1 ,-1},
+{-1, 1, 0, 2, 1, 2, 0, 1, 2 ,-1},
+{-1, 1, 2, 2, 1, 1, 1, 0, 0 ,-1},
+{-1, 1, 1, 2, 2, 0, 1, 2, 1 ,-1},
+{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+	};
 
 
 	return 0;
