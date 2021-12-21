@@ -17,6 +17,7 @@ int main() {
 {-1, 1, 1, 2, 2, 0, 1, 2, 1 ,-1},
 {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
 	};
+	/*
 	int x, y;
 	getBackup(map);
 	getScore(&x, &y);
@@ -29,6 +30,9 @@ int main() {
 		}
 		printf("\n");
 	}
-
+	printf("whoose win : %d", whoseWin());
+	*/
+	printMap();
+	printSubmenu(true,12,54);
 	return 0;
 }

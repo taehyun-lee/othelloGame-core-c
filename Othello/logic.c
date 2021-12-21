@@ -47,6 +47,19 @@ boolean isEndGame() {
 	}
 }
 
+int whoseWin()
+{
+	int x, y;
+	getScore(&x, &y);
+
+	if (x > y)
+		return 1;
+	else if (x < y)
+		return 2;
+	else
+		return -1;
+}
+
 bool convertToIndex(int* _x, int* _y)
 {
 	int i, j;
