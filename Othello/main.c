@@ -20,5 +20,18 @@ int main() {
 
 	printMap();
 	printSubmenu(true,12,54);
+	getBackup(map);
+	printStone();
+	Sleep(2000);
+
+	int a, b;
+	putRandomStone(true, &a, &b);
+	printSpecificStone(a, b);
+
+
+
+
+
+	printStone();
 	return 0;
 }

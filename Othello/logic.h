@@ -4,14 +4,16 @@
 /*
 *	특정 위치에 돌을 놓는 함수
 *	@parameter int _a:놓을 돌의 x좌표 int_b:놓을 돌의 y좌표
+*   @return 특정 위치가 빈칸이 아니였다면 false반환
 */
-void putStone(int _a, int _b);
+bool putStone(bool _black_turn, int _a, int _b);
 
 /*
 *	제한시간 안에 돌을 놓지 않았을 시 랜덤으로 돌을 놓는 함수
 *	@parameter int _player: 제한시간 안에 돌을 놓지 못한 플레이어
+*	@return 랜덤으로 돌을 놓을 수 있는 자리가 없다면 false반환
 */
-void putRandomStone(int _player);
+bool putRandomStone(bool _black_turn, int* _a, int* _b);
 
 /*
 *	주변 돌을 뒤집는 함수
@@ -37,14 +39,14 @@ bool convertToIndex(int* _x, int* _y);
 *	@parameter int _x: 계산될 자리의 x값 int_y: 계산될 자리의 y값
 *	@return	놓을 수 있는 자리가 맞다면 true 놓을 수 있는 자리가 아니라면 false
 */
-boolean isBlackPos(int _x, int _y);
+bool isBlackPos(int _x, int _y);
 
 /*
 *	백돌이 놓을 수 있는 자리인지 계산
 *	@parameter int _x: 계산될 자리의 x값 int_y: 계산될 자리의 y값
 *	@return 놓을 수 있는 자리가 맞다면 true 놓을 수 있는 자리가 아니라면 false
 */
-boolean isWhitePos(int _x, int _y);
+bool isWhitePos(int _x, int _y);
 
 /*
 *	현재 판의 score를 계산하는 함수

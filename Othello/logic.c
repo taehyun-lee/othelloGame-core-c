@@ -1,5 +1,6 @@
 ﻿#include "common.h"
 
+
 void getScore(int* _p1, int* _p2)
 {
 	int i, j;
@@ -7,9 +8,9 @@ void getScore(int* _p1, int* _p2)
 	*_p2 = 0;
 	for (i = 1; i <= 8; i++) {
 		for (j = 1; j <= 8; j++) {
-			if (map[i][j] == 1)
+			if (map[i][j] == PLAYER1)
 				(*_p1)++;
-			else if (map[i][j] == 2)
+			else if (map[i][j] == PLAYER2)
 				(*_p2)++;
 		}
 	}
@@ -21,11 +22,74 @@ int whoseWin()
 	getScore(&x, &y);
 
 	if (x > y)
-		return 1;
+		return PLAYER1;
 	else if (x < y)
-		return 2;
+		return PLAYER2;
 	else
-		return -1;
+		return DRAW;
+}
+
+bool putStone(bool _black_turn, int _a, int _b)
+{
+	if (map[_a][_b] != EMPTY)
+		return false;
+
+	if (_black_turn)
+		map[_a][_b] = PLAYER1;
+	else
+		map[_a][_b] = PLAYER2;
+	return true;
+}
+
+bool putRandomStone(bool _black_turn, int* _a, int* _b)
+{
+	int i, j;
+	typedef struct pos {
+		int pi;
+		int pj;
+	} Pos;
+
+	Pos possible[64];
+	int poss_num = 0;
+
+	if (_black_turn) {
+		for (i = 1; i <= 8; i++) {
+			for (j = 1; j <= 8; j++) {
+				if (isBlackPos(i, j)) {
+					Pos p;
+					p.pi = i;
+					p.pj = j;
+					possible[poss_num++] = p;
+				}
+			}
+		}
+	}
+	else {
+		for (i = 1; i <= 8; i++) {
+			for (j = 1; j <= 8; j++) {
+				if (isWhitePos(i, j)) {
+					Pos p;
+					p.pi = i;
+					p.pj = j;
+					possible[poss_num++] = p;
+				}
+			}
+		}
+	}
+
+	if(poss_num == 0)
+		return false;
+
+	srand((unsigned int)time(NULL));
+	int random = (int)rand() % poss_num;
+
+	*_a = possible[random].pi;
+	*_b = possible[random].pj;
+
+	if (putStone(_black_turn, *_a, *_b))
+		return true;
+	else
+		return false;
 }
 
 bool convertToIndex(int* _x, int* _y)
@@ -44,6 +108,16 @@ bool convertToIndex(int* _x, int* _y)
 	}
 
 	return false;
+}
+
+bool isBlackPos(int _x, int _y)
+{
+	return true;
+}
+
+bool isWhitePos(int _x, int _y)
+{
+	return true;
 }
 
 void gotoxy(int _x, int _y) {
