@@ -16,3 +16,4 @@
 #pragma warning(disable:4996)
 
 extern int map[10][10];
+extern int g_playtime;

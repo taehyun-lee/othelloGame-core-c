@@ -26,10 +26,9 @@ bool setRecord(int* _record, int _max_line);
 
 /*
 * backup.txt파일에서 데이터를 가지고오는 함수
-* @param _backup : 백업받을 2차원 배열포인터
 * @return 빈파일인 경우 false를 리턴, 정보가 존재할 시 true를 리턴
 */
-bool getBackup(int(*_backup)[10]);
+bool getBackup();
 
 /*
 * backup.txt파일에 데이터를 입력하는 함수

@@ -1,6 +1,7 @@
 ﻿#include "common.h"
 
 int map[10][10];
+int g_playtime;
 #define NUMBER 10
 int main() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -35,17 +36,25 @@ int main() {
 	//}
 
 	//  getBackup test
-	//if (getBackup(map)) {
-	//	for (int i = 0; i < 10; i++) {
-	//		for (int j = 0; j < 10; j++) {
-	//			printf("%d ", map[i][j]);
-	//		}
-	//		printf("\n");
-	//	}
-	//}
-	//else {
-	//	printf("empty");
-	//}
+
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j < 10; j++) {
+			printf("%d ", map[i][j]);
+		}
+		printf("\n");
+	}
+	if (getBackup()) {
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				printf("%d ", map[i][j]);
+			}
+			printf("\n");
+		}
+		printf("playtime = %d", g_playtime);
+	}
+	else {
+		printf("empty");
+	}
 
 	//  setbackup test
 	setBackup(testmap);

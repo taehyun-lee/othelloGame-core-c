@@ -107,25 +107,35 @@ bool setRecord(int* _record, int _max_line)
 	return true;
 }
 
-bool getBackup(int(*_backup)[10])
+bool getBackup()
 {
 	FILE* file;
 	char line[255];
-	file = fopen("backup.txt", "r");
 	int i = 0;
+	bool file_empty = true;
 
-	while (fgets(line, sizeof(line), file) != NULL) {
+	file = fopen("backup.txt", "r");
+
+	for (i = 0; i < 10; i++) {
+		//  올바른 문법형식이 아닌경우 return false
+		if (fgets(line, sizeof(line), file) == NULL)
+			return false;
+
+		file_empty = false;
 		int j = 0;
 		char* ptr = strtok(line, " ");
 		while (ptr != NULL) {
-			_backup[i][j++] = atoi(ptr);
+			map[i][j++] = atoi(ptr);
 			ptr = strtok(NULL, " ");
 		}
-		i++;
+	}
+	//  마지막 한줄 읽기-playtime
+	if (fgets(line, sizeof(line), file) != NULL) {
+		g_playtime = atoi(line);
 	}
 
 	fclose(file);
-	if (i == 0)
+	if (file_empty)
 		return false;
 	else
 		return true;
@@ -136,7 +146,8 @@ bool setBackup(int(*_map)[10])
 	FILE* file;
 	file = fopen("backup.txt", "w");
 	int i, j;
-	char tok[50];
+	char tok[50], ptime[10];
+
 	if (file == NULL)
 		return false;
 
@@ -150,6 +161,9 @@ bool setBackup(int(*_map)[10])
 				fputs("\n", file);
 		}
 	}
+	itoa(g_playtime, ptime, 10);
+	fputs(ptime, file);
+
 	fclose(file);
 	return true;
 }
