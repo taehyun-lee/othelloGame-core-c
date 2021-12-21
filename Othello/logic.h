@@ -36,8 +36,9 @@ void getXY(int* _x, int* _y,time_t _start);
 /*
 *	마우스로 입력된 xy값을 배열의 인덱스로 보정해 주는 함수
 *	@parameter int* _x: 입력받은 마우스의 x값, int* _y: 입력받은 마우스의 y값
+*   @return 판 안에 있는 x,y좌표을 입력받아서 정상적으로 변환되었을 때 true반환
 */
-void convertInputXY(int* _x, int* _y);
+bool convertToIndex(int* _x, int* _y);
 
 /*
 *	흑돌이 놓을 수 있는 자리인지 계산

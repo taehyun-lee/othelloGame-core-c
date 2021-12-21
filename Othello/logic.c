@@ -32,6 +32,24 @@ boolean isEndGame() {
 	}
 }
 
+bool convertToIndex(int* _x, int* _y)
+{
+	int i, j;
+	int base_x = 18, base_y = 9;
+	int dx = 8, dy = 4;
+	for (i = 0; i < 8; i++) {
+		for (j = 0; j < 8; j++) {
+			if (*_x >= base_x + i * dx && *_x < base_x + (i + 1) * dx && *_y >= base_y + j * dy && *_y < base_y - 1 + (j + 1) * dy) {
+				*_x = j;
+				*_y = i;
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
 boolean isBlackPos(int _x,int _y) {
 	int x = 0;
 	int y = 0;
