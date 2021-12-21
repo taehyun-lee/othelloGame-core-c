@@ -1,5 +1,20 @@
 ﻿#include "common.h"
 
+void getScore(int* _p1, int* _p2)
+{
+	int i, j;
+	*_p1 = 0;
+	*_p2 = 0;
+	for (i = 1; i <= 8; i++) {
+		for (j = 1; j <= 8; j++) {
+			if (map[i][j] == 1)
+				(*_p1)++;
+			else if (map[i][j] == 2)
+				(*_p2)++;
+		}
+	}
+}
+
 boolean isEndGame() {
 
 

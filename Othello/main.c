@@ -17,7 +17,18 @@ int main() {
 {-1, 1, 1, 2, 2, 0, 1, 2, 1 ,-1},
 {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
 	};
+	int x, y;
+	getBackup(map);
+	getScore(&x, &y);
 
+	printf("p1 : %d, p2 : %d\n", x, y);
+
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j < 10; j++) {
+			printf("%2d  ", map[i][j]);
+		}
+		printf("\n");
+	}
 
 	return 0;
 }
