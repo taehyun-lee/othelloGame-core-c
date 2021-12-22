@@ -35,4 +35,4 @@ bool getBackup();
 * @param _map : 저장할 데이터
 * @return 정상적으로 파일에 출력이 되었을 경우 true 리턴
 */
-bool setBackup(int(*_map)[10]);
+bool setBackup();

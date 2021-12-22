@@ -58,7 +58,7 @@ void getScore(int* _p1, int* _p2);
 *	게임이 종료되었는지 판단하는 함수
 *	@return	종료 true 종료 되지 않았다면 false
 */
-boolean isEndGame();
+boolean isGameEnd();
 
 /*
 *	누가 이겼는지 판단하는 함수
@@ -67,12 +67,32 @@ boolean isEndGame();
 int whoseWin();
 
 /*
-*	클릭되었는지 확인하는 함수
-*/
-boolean isClick();
-
-/*
 * 커서를 X,Y 위치로 옮기는 함수
 * @parameter _x: 옮기고 싶은 x값 _y: 옮기고 싶은 y값
 */
 void gotoxy(int _x, int _y);
+
+/*
+* x,y 마우스 입력 받는 함수
+*/
+int be_input();
+
+/*
+* x,y 마우스 입력 받는 함수
+*/
+int get_input(WORD* vkey, COORD* pos);
+
+/*
+* 시간 다운 카운팅 및 출력
+* @param avg	제한시간
+* @return NULL
+*/
+void* thread_time(void* avg);
+
+/*
+* 유효한 마우스 입력시 좌표값 반환
+* @param avg	NULL
+* @return x, y array
+*/
+void* thread_mouse(void* avg);
+

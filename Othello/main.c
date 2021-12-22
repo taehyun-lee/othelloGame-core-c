@@ -1,23 +1,14 @@
 ﻿#include "common.h"
 
-int map[10][10];
+int g_map[10][10];
 int g_playtime;
-#define NUMBER 10
-int main() {
+bool g_time_th_end = FALSE;  //  제한시간 스레드 종료 여부
+bool g_mouse_th_end = FALSE;  //  마우스 입력 스레드 종료 여부
+
+void main()
+{
+	//  메모리 누수 체크 (디버그 모드)
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	init();
-	int record[NUMBER][5] = { 0, };
-	int testmap[10][10] = { {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-{-1, 1 ,1, 0, 2, 0, 1, 0, 1, -1},
-{-1, 1, 0, 2, 1, 2, 0, 1, 2 ,-1},
-{-1, 1, 2, 2, 1, 1, 0, 0, 1 ,-1},
-{-1, 1, 2, 1, 2, 0, 0, 2, 1 ,-1},
-{-1, 1, 1, 0, 2, 0, 1, 0, 1 ,-1},
-{-1, 1, 0, 2, 1, 2, 0, 1, 2 ,-1},
-{-1, 1, 2, 2, 1, 1, 1, 0, 0 ,-1},
-{-1, 1, 1, 2, 2, 0, 1, 2, 1 ,-1},
-{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-	};
-	printf("hello");
-	return 0;
+	printf("hi");
+
 }

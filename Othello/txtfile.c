@@ -125,7 +125,7 @@ bool getBackup()
 		int j = 0;
 		char* ptr = strtok(line, " ");
 		while (ptr != NULL) {
-			map[i][j++] = atoi(ptr);
+			g_map[i][j++] = atoi(ptr);
 			ptr = strtok(NULL, " ");
 		}
 	}
@@ -141,7 +141,7 @@ bool getBackup()
 		return true;
 }
 
-bool setBackup(int(*_map)[10])
+bool setBackup()
 {
 	FILE* file;
 	file = fopen("backup.txt", "w");
@@ -153,7 +153,7 @@ bool setBackup(int(*_map)[10])
 
 	for (i = 0; i < 10; i++) {
 		for (j = 0; j < 10; j++) {
-			itoa(_map[i][j], tok, 10);
+			itoa(g_map[i][j], tok, 10);
 			fputs(tok, file);
 			if (j != 9)
 				fputs(" ", file);

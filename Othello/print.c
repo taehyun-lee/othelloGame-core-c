@@ -1,6 +1,5 @@
 ﻿#include "common.h"
 
-
 void printMainmenu()
 {
 	int width = 38;
@@ -102,11 +101,11 @@ void printStone()
 	for (i = 0; i < MAPSIZE; i++) {
 		for (j = 0; j < MAPSIZE; j++) {
 			gotoxy(base_x + j * dx, base_y + i * dy);
-			if (map[i + 1][j + 1] == 1)
+			if (g_map[i + 1][j + 1] == 1)
 				printf("●");
-			else if (map[i + 1][j + 1] == 2)
+			else if (g_map[i + 1][j + 1] == 2)
 				printf("○");
-			else if (map[i + 1][j + 1] == 0)
+			else if (g_map[i + 1][j + 1] == 0)
 				continue;
 			else
 				printf("＃");  //  avoid case
@@ -123,15 +122,14 @@ void printSpecificStone(int _a, int _b) {
 
 	gotoxy(base_x + _b * dx, base_y + _a * dy);  // 배열의 인덱스 적용을 위해 뒤집기
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-	if (map[_a][_b] == 1)
+	if (g_map[_a][_b] == 1)
 		printf("●");
-	else if (map[_a][_b] == 2)
+	else if (g_map[_a][_b] == 2)
 		printf("○");
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 	
 	gotoxy(0, 45); // 프로세스 종료 시 나오는 문구 처리를 위해 커서를 옮김
 }
-
 
 void printEndMsg(int _playtime, int _p1_score, int _p2_score)
 {
