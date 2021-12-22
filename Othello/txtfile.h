@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+#include "common.h"
 /*
 * 홈경로에 record.txt, backup.txt가 있는지 확인 및 생성하는 함수
 */

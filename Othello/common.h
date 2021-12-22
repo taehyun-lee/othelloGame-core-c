@@ -17,3 +17,9 @@
 
 extern int map[10][10];
 extern int g_playtime;
+
+#define EMPTY 0
+#define PLAYER1 1
+#define PLAYER2 2
+#define DRAW 3
+#define EDGE -1
