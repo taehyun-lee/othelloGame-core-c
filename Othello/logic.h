@@ -89,3 +89,11 @@ boolean getBackupInfo(int(*_map)[10]);
 *	클릭되었는지 확인하는 함수
 */
 boolean isClick();
+
+int be_input();
+
+int get_input(WORD* vkey, COORD* pos);
+
+void* thread_time(void* avg);
+
+void* thread_mouse(void* avg);
