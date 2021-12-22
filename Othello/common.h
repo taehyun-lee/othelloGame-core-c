@@ -22,18 +22,10 @@ extern int g_playtime;
 extern bool g_time_th_end;
 extern bool g_mouse_th_end;
 
-//#if !define(HAVE_STRUCT_TIMESPEC)
-//#define HAVE_STRUCT_TIMESPEC
-//#if !define(_TIMESPEC_DEFINED)
-//#define _TIMESPEC_DEFINED
-//#if defined(_MSC_VER) && _MSC_VER >= 1900 && defined(_CRT_NO_TIME_T)
-
-
-
 #define _CRTDBG_MAP_ALLOC
 #define EMPTY 0
 #define PLAYER1 1
 #define PLAYER2 2
 #define DRAW 3
 #define EDGE -1
-
+#define MAXLINE 15

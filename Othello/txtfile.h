@@ -12,7 +12,7 @@ void checkFile();
 * p1_score, p2_score, winner, playtime, date
 * @return 빈파일인 경우 false를 리턴 정보가 존재할 시 true를 리턴
 */
-bool getRecord(int(*_record)[5], int _max_line);
+bool getRecord(int(*_record)[5]);
 
 /*
 * record.txt파일에 데이터를 입력하는 함수
@@ -22,7 +22,7 @@ bool getRecord(int(*_record)[5], int _max_line);
 * @param _max_line : 최대 행 개수
 * p1_score, p2_score, winner, playtime, date
 */
-bool setRecord(int* _record, int _max_line);
+bool setRecord(int* _record);
 
 /*
 * backup.txt파일에서 데이터를 가지고오는 함수

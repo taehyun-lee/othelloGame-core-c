@@ -11,7 +11,7 @@ void checkFile()
 	fclose(file_backup);
 }
 
-bool getRecord(int(*_record)[5], int _max_line)
+bool getRecord(int(*_record)[5])
 {
 	FILE* file;
 	char line[255];
@@ -26,7 +26,7 @@ bool getRecord(int(*_record)[5], int _max_line)
 			ptr = strtok(NULL, " ");
 		}
 		i++;
-		if (i == _max_line)
+		if (i == MAXLINE)
 			break;
 	}
 
@@ -37,11 +37,12 @@ bool getRecord(int(*_record)[5], int _max_line)
 		return true;
 }
 
-bool setRecord(int* _record, int _max_line)
+bool setRecord(int* _record)
 {
 	FILE* file;
 	char line[255];  //  파일에서 읽어오는 행
 	char target[255];  //  입력할 행
+	char txt_info[MAXLINE][255];
 	int row = 0;
 	int i;
 
@@ -55,35 +56,23 @@ bool setRecord(int* _record, int _max_line)
 		strcat(target, tok);
 		if (i != 4)
 			strcat(target, " ");
-		else
-			strcat(target, "\n");
+		//else
+		//	strcat(target, "\n");
 	}
-
-	//  2차원 동적 배열 생성 및 초기화
-	char** txt_info = malloc(sizeof(char*)*_max_line);
-	for (i = 0; i < _max_line; i++) {
-		if (txt_info != NULL) {
-			txt_info[i] = malloc(sizeof(char) * 200);
-			if (txt_info[i] != NULL)
-				txt_info[i][0] = '\0';
-			else
-				return false;
-		}
-		else
-			return false;
-	}
-
 	//  파일 데이터 읽기
 	while((fgets(line, sizeof(line), file) != NULL)) {
 		for (i = 0; i < strlen(line) + 1; i++) {
-			txt_info[row][i] = line[i];
 			if (i == strlen(line) + 1)
 				txt_info[row][i] = '\0';
+			else
+				txt_info[row][i] = line[i];
 		}
 		row++;
+		if (row == MAXLINE)
+			break;
 	}
 
-	if (row < _max_line) {
+	if (row < MAXLINE) {
 		fseek(file, 0, SEEK_END);
 		fputs(target, file);
 		fclose(file);
@@ -93,17 +82,14 @@ bool setRecord(int* _record, int _max_line)
 		FILE* file_re;
 		file_re = fopen("record.txt", "w");
 		fseek(file_re, 0, SEEK_SET);  //  파일 포인터 첫행으로 이동
-		int cnt = 0;
-		for (i = 1; i < _max_line; i++) { // 기존 파일의 2번째 행부터 첫행에 출력
-			fputs(txt_info[i], file_re);
+		for (int k = 1; k < MAXLINE; k++) { // 기존 파일의 2번째 행부터 첫행에 출력
+			fputs(txt_info[k], file_re);
 		}
+		fputs("\n", file_re);
 		fputs(target, file_re);
 		fclose(file_re);
 	}
-	for (int k = 0; k < _max_line; k++)
-		free(txt_info[k]);
-	free(txt_info);
-	
+
 	return true;
 }
 
