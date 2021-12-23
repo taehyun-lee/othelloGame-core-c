@@ -233,15 +233,23 @@ void printSubmenu(boolean _black_turn, int _p1_score, int _p2_score) {
 	gotoxy(margin_left, CONSOLE_HEIGHT / 2 ); // 흑 스코어 출력
 	printf("● %d",_p1_score);
 	
-	gotoxy(CONSOLE_WIDTH - margin_left, CONSOLE_HEIGHT / 2 ); // 백 스코어 출력
+	gotoxy(CONSOLE_WIDTH - margin_left - 2 , CONSOLE_HEIGHT / 2 ); // 백 스코어 출력
 	printf("○ %d",_p2_score);
 	
-	gotoxy(CONSOLE_WIDTH / 2 - 5, CONSOLE_HEIGHT - margin_top ); // 현재 진행중인 플레이어 출력
+	gotoxy(CONSOLE_WIDTH / 2 - 5, margin_top - 3 ); // 현재 진행중인 플레이어 출력
 		if (_black_turn)
 			printf("Black Turn");
 		else
 			printf("White Turn");
 
+	int base_line = 42;
+	margin_left = 20;
+	gotoxy(margin_left + 18, base_line++);
+	printf("┏━━━━━━━━━━━━━━━━━━━┓");
+	gotoxy(margin_left + 18, base_line++);
+	printf("┃     E  X  I  T    ┃");
+	gotoxy(margin_left + 18, base_line++);
+	printf("┗━━━━━━━━━━━━━━━━━━━┛");
 	gotoxy(0, 45);		// 프로세스 종료 시 나오는 문구 처리를 위해 커서를 옮김
 }
 
