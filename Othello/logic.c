@@ -48,10 +48,6 @@ bool putStone(bool _black_turn, int _a, int _b)
 bool putRandomStone(bool _black_turn, int* _a, int* _b)
 {
 	int i, j;
-	typedef struct pos {
-		int pi;
-		int pj;
-	} Pos;
 
 	Pos possible[64];
 	int poss_num = 0;
@@ -61,8 +57,8 @@ bool putRandomStone(bool _black_turn, int* _a, int* _b)
 			for (j = 1; j <= 8; j++) {
 				if (isBlackPos(i, j)) {
 					Pos p;
-					p.pi = i;
-					p.pj = j;
+					p.a = i;
+					p.b = j;
 					possible[poss_num++] = p;
 				}
 			}
@@ -73,8 +69,8 @@ bool putRandomStone(bool _black_turn, int* _a, int* _b)
 			for (j = 1; j <= 8; j++) {
 				if (isWhitePos(i, j)) {
 					Pos p;
-					p.pi = i;
-					p.pj = j;
+					p.a = i;
+					p.b = j;
 					possible[poss_num++] = p;
 				}
 			}
@@ -87,8 +83,8 @@ bool putRandomStone(bool _black_turn, int* _a, int* _b)
 	srand((unsigned int)time(NULL));
 	int random = (int)rand() % poss_num;
 
-	*_a = possible[random].pi;
-	*_b = possible[random].pj;
+	*_a = possible[random].a;
+	*_b = possible[random].b;
 
 	if (putStone(_black_turn, *_a, *_b))
 		return true;
@@ -96,16 +92,16 @@ bool putRandomStone(bool _black_turn, int* _a, int* _b)
 		return false;
 }
 
-bool convertToIndex(int* _x, int* _y)
+bool coordToIndex(int _x, int _y, int* _a, int* _b)
 {
 	int i, j;
 	int base_x = 18, base_y = 9;
 	int dx = 8, dy = 4;
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 8; j++) {
-			if (*_x >= base_x + i * dx && *_x < base_x + (i + 1) * dx && *_y >= base_y + j * dy && *_y < base_y - 1 + (j + 1) * dy) {
-				*_x = j;
-				*_y = i;
+			if (_x >= base_x + i * dx && _x < base_x + (i + 1) * dx && _y >= base_y + j * dy && _y < base_y - 1 + (j + 1) * dy) {
+				*_a = j;
+				*_b = i;
 				return true;
 			}
 		}
@@ -129,7 +125,7 @@ void gotoxy(int _x, int _y) {
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
-int be_input()
+int beInput()
 {
 	INPUT_RECORD input_record;
 	DWORD input_count;
@@ -138,7 +134,7 @@ int be_input()
 	return input_count;
 }
 
-int get_input(WORD* vkey, COORD* pos)
+int getInput(WORD* vkey, COORD* pos)
 {
 	INPUT_RECORD input_record;
 	DWORD input_count;
@@ -163,7 +159,7 @@ int get_input(WORD* vkey, COORD* pos)
 	return 0;
 }
 
-void* thread_time(void* avg) {
+void* threadTime(void* avg) {
 	int limit_time = *((int*)avg);
 	while (limit_time != -1) {
 		gotoxy(10, 10);
@@ -174,7 +170,7 @@ void* thread_time(void* avg) {
 	return NULL;
 }
 
-void* thread_mouse(void* avg) {
+void* threadMouse(void* avg) {
 	DWORD mode;
 	WORD key;
 	COORD pos;
@@ -193,9 +189,9 @@ void* thread_mouse(void* avg) {
 	int clk_s = clock();
 	while (1)
 	{
-		if (be_input())
+		if (beInput())
 		{
-			if (get_input(&key, &pos) != 0)
+			if (getInput(&key, &pos) != 0)
 			{
 				MOUSE_EVENT;
 				x = pos.X;    // 마우스클릭값이 x,y변수에 저장되도록함
