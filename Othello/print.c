@@ -168,18 +168,26 @@ void printEndMsg(int _playtime, int _p1_score, int _p2_score)
 		comment = "~~~~~Draw~~~~";
 
 	base_line = margin_top;
-	gotoxy(margin_left + 8, base_line + 4);
+	gotoxy(margin_left + 9, base_line + 3);
 	printf("%s", comment);
 	
-	gotoxy(margin_left + 8, base_line + 8);
+	gotoxy(margin_left + 7, base_line + 6);
 	if (_playtime >= 60 * 60) 
 		printf("playtime : %dm %ds", 59, 59);
 	else
 		printf("playtime : %dm %ds", _playtime / 60, _playtime % 60);
 
 
-	gotoxy(margin_left + 8, base_line + 10);
+	gotoxy(margin_left + 7, base_line + 8);
 	printf("score : %d : %d", _p1_score, _p2_score);
+
+	gotoxy(margin_left + 7, base_line + 10);
+	printf("┏━━━━━━━━━━━━━━━┓");
+	gotoxy(margin_left + 7, base_line + 11);
+	printf("┃     O   K     ┃");
+
+	gotoxy(margin_left + 7, base_line + 12);
+	printf("┗━━━━━━━━━━━━━━━┛");
 
 	gotoxy(0, 45);	// 프로세스 종료 시 나오는 문구 처리를 위해 커서를 옮김
 }
@@ -203,7 +211,7 @@ void printSave()
 
 	gotoxy(margin_left + 10, margin_top + 5);
 	printf("Do yout want to save");
-	gotoxy(margin_left + 10, margin_top + 7);
+	gotoxy(margin_left + 11, margin_top + 7);
 	printf("the current game?");
 
 	btn_base_line = base_line - 7;
