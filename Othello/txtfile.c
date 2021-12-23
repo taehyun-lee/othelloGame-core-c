@@ -115,9 +115,17 @@ bool getBackup()
 			ptr = strtok(NULL, " ");
 		}
 	}
-	//  마지막 한줄 읽기-playtime
+	//  한줄 읽기-playtime
 	if (fgets(line, sizeof(line), file) != NULL) {
 		g_playtime = atoi(line);
+	}
+	
+	//  한줄 읽기-black_turn
+	if (fgets(line, sizeof(line), file) != NULL) {
+		if(atoi(line) == 1)
+			g_is_black_turn = true;
+		else
+			g_is_black_turn = false;
 	}
 
 	fclose(file);
@@ -149,6 +157,13 @@ bool setBackup()
 	}
 	itoa(g_playtime, ptime, 10);
 	fputs(ptime, file);
+
+	fputs("\n", file);
+
+	if (g_is_black_turn)
+		fputs("1", file);
+	else
+		fputs("0", file);
 
 	fclose(file);
 	return true;

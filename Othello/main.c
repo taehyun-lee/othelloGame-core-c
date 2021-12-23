@@ -6,10 +6,13 @@ bool g_time_th_end = false;  //  제한시간 스레드 종료 여부
 bool g_mouse_th_end = false;  //  마우스 입력 스레드 종료 여부
 bool g_is_black_turn = true;  // 현재 플레이어 차례 확인
 
+
 void main()
 {
 	//  메모리 누수 체크 (디버그 모드)
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	printf("hi");
 
+	init();
+	printMap();
+	printStone();
 }
