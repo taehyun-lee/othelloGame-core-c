@@ -3,12 +3,12 @@
 void printMainmenu()
 {
 	int width = 38;
-	int margin_left = 30;
-	int margin_top = 10;
+	int margin_left = 29;
+	int margin_top = 13;
 	int base_line = margin_top;
 	int i, j, k;
 
-	gotoxy(margin_left + 10, margin_top - 2);
+	gotoxy(margin_left + 11, margin_top - 3);
 	printf("<< O T H E L L O >>");
 
 	gotoxy(margin_left, base_line++);
