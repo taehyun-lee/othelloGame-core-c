@@ -29,8 +29,3 @@ extern int g_map[10][10];
 extern int g_playtime;
 extern bool g_time_th_end;
 extern bool g_mouse_th_end;
-
-typedef struct pos {
-	int a;
-	int b;
-} Pos;

@@ -1,6 +1,12 @@
 ﻿#pragma once
 #include "common.h"
 
+typedef struct pos {
+	int a;
+	int b;
+} Pos;
+
+
 /*
 *	특정 위치에 돌을 놓는 함수
 *	@param int _a:놓을 돌의 x좌표 int_b:놓을 돌의 y좌표

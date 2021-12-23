@@ -5,6 +5,12 @@ DWORD dwNOER;
 HANDLE COUT = 0;    // 콘솔 출력 장치
 HANDLE CIN = 0;        // 콘솔 입력 장치
 
+
+bool isPossiblePos(bool _black_turn, int _a, int _b, Pos* _pos)
+{
+	return false;
+}
+
 void getScore(int* _p1, int* _p2)
 {
 	int i, j;
@@ -47,49 +53,37 @@ bool putStone(bool _black_turn, int _a, int _b)
 
 bool putRandomStone(bool _black_turn, int* _a, int* _b)
 {
-	int i, j;
+	//int i, j;
 
-	Pos possible[64];
-	int poss_num = 0;
+	//Pos possible[64];
+	//int poss_num = 0;
 
-	if (_black_turn) {
-		for (i = 1; i <= 8; i++) {
-			for (j = 1; j <= 8; j++) {
-				if (isBlackPos(i, j)) {
-					Pos p;
-					p.a = i;
-					p.b = j;
-					possible[poss_num++] = p;
-				}
-			}
-		}
-	}
-	else {
-		for (i = 1; i <= 8; i++) {
-			for (j = 1; j <= 8; j++) {
-				if (isWhitePos(i, j)) {
-					Pos p;
-					p.a = i;
-					p.b = j;
-					possible[poss_num++] = p;
-				}
-			}
-		}
-	}
+	//if (_black_turn) {
+	//	for (i = 1; i <= 8; i++) {
+	//		for (j = 1; j <= 8; j++) {
+	//			if (isPossiblePos(1,i, j,possible)) {
+	//				Pos p;
+	//				p.a = i;
+	//				p.b = j;
+	//				possible[poss_num++] = p;
+	//			}
+	//		}
+	//	}
+	//}
 
-	if(poss_num == 0)
-		return false;
+	//if(poss_num == 0)
+	//	return false;
 
-	srand((unsigned int)time(NULL));
-	int random = (int)rand() % poss_num;
+	//srand((unsigned int)time(NULL));
+	//int random = (int)rand() % poss_num;
 
-	*_a = possible[random].a;
-	*_b = possible[random].b;
+	//*_a = possible[random].a;
+	//*_b = possible[random].b;
 
-	if (putStone(_black_turn, *_a, *_b))
-		return true;
-	else
-		return false;
+	//if (putStone(_black_turn, *_a, *_b))
+	//	return true;
+	//else
+	//	return false;
 }
 
 bool coordToIndex(int _x, int _y, int* _a, int* _b)
@@ -108,16 +102,6 @@ bool coordToIndex(int _x, int _y, int* _a, int* _b)
 	}
 
 	return false;
-}
-
-bool isBlackPos(int _x, int _y)
-{
-	return true;
-}
-
-bool isWhitePos(int _x, int _y)
-{
-	return true;
 }
 
 void gotoxy(int _x, int _y) {
