@@ -6,7 +6,7 @@ HANDLE COUT = 0;    // 콘솔 출력 장치
 HANDLE CIN = 0;        // 콘솔 입력 장치
 
 
-bool isPossiblePos(bool _black_turn, int _a, int _b, Pos* _pos)
+bool isPossiblePos(int _a, int _b, Pos* _pos)
 {
 	return false;
 }
@@ -39,19 +39,19 @@ int whoseWin()
 		return DRAW;
 }
 
-bool putStone(bool _black_turn, int _a, int _b)
+bool putStone(int _a, int _b)
 {
 	if (g_map[_a][_b] != EMPTY)
 		return false;
 
-	if (_black_turn)
+	if (g_is_black_turn)
 		g_map[_a][_b] = PLAYER1;
 	else
 		g_map[_a][_b] = PLAYER2;
 	return true;
 }
 
-bool putRandomStone(bool _black_turn, int* _a, int* _b)
+bool putRandomStone(int* _a, int* _b)
 {
 	//int i, j;
 

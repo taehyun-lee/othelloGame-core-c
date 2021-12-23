@@ -2,8 +2,9 @@
 
 int g_map[10][10];
 int g_playtime;
-bool g_time_th_end = FALSE;  //  제한시간 스레드 종료 여부
-bool g_mouse_th_end = FALSE;  //  마우스 입력 스레드 종료 여부
+bool g_time_th_end = false;  //  제한시간 스레드 종료 여부
+bool g_mouse_th_end = false;  //  마우스 입력 스레드 종료 여부
+bool g_is_black_turn = true;  // 현재 플레이어 차례 확인
 
 void main()
 {

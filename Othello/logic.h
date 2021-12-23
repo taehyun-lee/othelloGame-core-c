@@ -12,14 +12,14 @@ typedef struct pos {
 *	@param int _a:놓을 돌의 x좌표 int_b:놓을 돌의 y좌표
 *   @return 특정 위치가 빈칸이 아니였다면 false반환
 */
-bool putStone(bool _black_turn, int _a, int _b);
+bool putStone(int _a, int _b);
 
 /*
 *	제한시간 안에 돌을 놓지 않았을 시 랜덤으로 돌을 놓는 함수
 *	@param int _player: 제한시간 안에 돌을 놓지 못한 플레이어
 *	@return 랜덤으로 돌을 놓을 수 있는 자리가 없다면 false반환
 */
-bool putRandomStone(bool _black_turn, int* _a, int* _b);
+bool putRandomStone(int* _a, int* _b);
 
 /*
 *	주변 돌을 뒤집는 함수
@@ -47,7 +47,7 @@ bool coordToIndex(int _x, int _y, int* _a, int* _b);
 * @param _a, _b 확인할 인덱스
 * @param _pos 뒤집을 돌들의 인덱스 배열
 */
-bool isPossiblePos(bool _black_turn, int _a, int _b, Pos* _pos);
+bool isPossiblePos(int _a, int _b, Pos* _pos);
 
 /*
 *	현재 판의 score를 계산하는 함수
