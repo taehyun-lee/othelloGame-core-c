@@ -12,7 +12,7 @@ typedef struct pos {
 *	@param int _a:놓을 돌의 x좌표 int_b:놓을 돌의 y좌표
 *   @return 특정 위치가 빈칸이 아니였다면 false반환
 */
-bool putStone(int _a, int _b);
+void putStone(int _a, int _b);
 
 /*
 *	제한시간 안에 돌을 놓지 않았을 시 랜덤으로 돌을 놓는 함수
@@ -25,7 +25,7 @@ bool putRandomStone(int* _a, int* _b);
 *	주변 돌을 뒤집는 함수
 *	@param int_player:현재 턴을 진행중인 플레이어
 */
-void flipStone(int _player);
+void flipStone(int _a, int _b);
 
 /*
 *	마우스입력을 받아 해당 xy값 반환하는 함수
@@ -47,7 +47,7 @@ bool coordToIndex(int _x, int _y, int* _a, int* _b);
 * @param _a, _b 확인할 인덱스
 * @param _pos 뒤집을 돌들의 인덱스 배열
 */
-bool isPossiblePos(int _a, int _b, Pos* _pos);
+bool isPossiblePos(int _a, int _b);
 
 /*
 *	현재 판의 score를 계산하는 함수
@@ -60,6 +60,9 @@ void getScore(int* _p1, int* _p2);
 *	@return	종료 true 종료 되지 않았다면 false
 */
 bool isGameEnd();
+
+bool isTherePlacePutBlack();
+bool isTherePlacePutWhite();
 
 /*
 *	누가 이겼는지 판단하는 함수
@@ -125,3 +128,4 @@ bool isbtnOk(int _x, int _y);
 */
 int whichBtnSelect(int _x, int _y);
 
+void screenClear();

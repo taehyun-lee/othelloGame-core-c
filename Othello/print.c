@@ -98,17 +98,20 @@ void printStone()
 	int dy = 4;
 	int i, j;
 
-	for (i = 0; i < MAPSIZE; i++) {
-		for (j = 0; j < MAPSIZE; j++) {
-			gotoxy(base_x + j * dx, base_y + i * dy);
-			if (g_map[i + 1][j + 1] == 1)
-				printf("●");
-			else if (g_map[i + 1][j + 1] == 2)
-				printf("○");
-			else if (g_map[i + 1][j + 1] == 0)
-				continue;
-			else
-				printf("＃");  //  avoid case
+	for (i = 1; i <= 8 ; i++) {
+		for (j = 1; j <= 8; j++) {
+			if (g_map[i][j] == PLAYER1 || g_map[i][j] == PLAYER2) {
+
+				gotoxy(base_x + (j-1) * dx, base_y + (i-1) * dy);
+				if (g_map[i][j] == 1)
+					printf("●");
+				else if (g_map[i][j] == 2)
+					printf("○");
+				//else if (g_map[i + 1][j + 1] == 0)
+				//	continue;
+				else
+					printf("＃");  //  avoid case
+			}
 		}
 	}
 	gotoxy(0, 45);	// 프로세스 종료 시 나오는 문구 처리를 위해 커서를 옮김
