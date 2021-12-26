@@ -346,6 +346,8 @@ void* threadTime(void* avg) {
 }
 
 void* threadMouse(void* avg) {
+	pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
 	DWORD mode;
 	WORD key;
 	COORD pos;
