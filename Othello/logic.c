@@ -98,27 +98,6 @@ bool isGameEnd()
 		return false;
 	else
 		return true;
-
-/*
-	for (int i = 1; i <= 8; i++) {
-		for (int j = 1; j <= 8; j++) {
-			if (g_map[i][j] == EMPTY) {
-				if (isPossiblePos(i, j)) {
-					return false;
-				}
-				
-				g_is_black_turn = !g_is_black_turn;
-				if (isPossiblePos(i, j)) {
-					g_is_black_turn = !g_is_black_turn;
-					return false;
-				}
-				
-			}
-
-		}
-	}
-	return true;
-*/
 }
 
 bool isTherePlacePutBlack()
@@ -192,7 +171,7 @@ bool putRandomStone(int* _a, int* _b)
 		}
 	}
 	//  둘 곳이 없으므로 다음차례로 넘겨야 함
-	if(poss_num == 0)
+	if (poss_num == 0)
 		return false;
 
 	srand((unsigned int)time(NULL));
@@ -226,7 +205,7 @@ void flipStone(int _a, int _b)
 			int dy = interval[i][1];
 			while (g_map[_a + dx][_b + dy] == PLAYER1 || g_map[_a + dx][_b + dy] == PLAYER2) {
 				if (g_map[_a + dx][_b + dy] == PLAYER1 && !first_case) {
-					for (int j = 0;j<flip_size; j++) {
+					for (int j = 0; j < flip_size; j++) {
 						putStone(flip[j].a, flip[j].b);
 					}
 					break;
@@ -254,7 +233,7 @@ void flipStone(int _a, int _b)
 			int dy = interval[i][1];
 			while (g_map[_a + dx][_b + dy] == PLAYER2 || g_map[_a + dx][_b + dy] == PLAYER1) {
 				if (g_map[_a + dx][_b + dy] == PLAYER2 && !first_case) {
-					for (int j = 0;j<flip_size; j++) {
+					for (int j = 0; j < flip_size; j++) {
 						putStone(flip[j].a, flip[j].b);
 					}
 					break;
@@ -288,10 +267,10 @@ void getXY(int* _x, int* _y)
 	}
 
 	pthread_join(th_mouse_id, (void**)&status_mouse);
-	*_x = ((int*)status_mouse)[0];
-	*_y = ((int*)status_mouse)[1];
-	free(status_mouse);
-
+	Pos* temp;
+	temp = (Pos*)status_mouse;
+	*_x = temp->a;
+	*_y = temp->b;
 }
 
 bool coordToIndex(int _x, int _y, int* _a, int* _b)
@@ -352,15 +331,15 @@ int getInput(WORD* vkey, COORD* pos)
 }
 
 void* threadTime(void* avg) {
-	
+
 	pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
-	g_time_th_end = false;
-	
+	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
+
 	int limit_time = 30;
-	while (limit_time != -1) {
+	while (limit_time != 0) {
 		gotoxy(43, 2);
-		Sleep(1000);
 		printf("limitTime : %2ds", limit_time--);
+		Sleep(1000);
 	}
 	g_time_th_end = true;
 	return NULL;
@@ -371,10 +350,8 @@ void* threadMouse(void* avg) {
 	WORD key;
 	COORD pos;
 
-	//int event; // 어디서 사용하는지 불명확       // 마우스 이벤트에 이용 
 	int x;            // 마우스의 x좌표 저장소
 	int y;            // 마우스의 y좌표 저장소
-	int* retval; // 1차원 동적 배열 x,y 좌표
 
 	CIN = GetStdHandle(STD_INPUT_HANDLE);
 	COUT = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -382,10 +359,8 @@ void* threadMouse(void* avg) {
 	// 마우스 활성화
 	GetConsoleMode(CIN, &mode);
 	SetConsoleMode(CIN, mode | ENABLE_MOUSE_INPUT);
-	int clk_s = clock();
-	while (1)
+	while (true)
 	{
-		g_mouse_th_end = false;
 		if (beInput())
 		{
 			if (getInput(&key, &pos) != 0)
@@ -393,13 +368,6 @@ void* threadMouse(void* avg) {
 				MOUSE_EVENT;
 				x = pos.X;    // 마우스클릭값이 x,y변수에 저장되도록함
 				y = pos.Y;
-				/*retval = malloc(sizeof(int) * 2);
-				if (retval != NULL) {
-					retval[0] = x;
-					retval[1] = y;
-					g_mouse_th_end = TRUE;
-					return (void*)retval;
-				}*/
 				static Pos p;
 				p.a = x;
 				p.b = y;
@@ -418,17 +386,4 @@ bool isBtnExit(int _x, int _y)
 int whichBtnSelect(int _x, int _y)
 {
 	return 0;
-}
-
-void screenClear()
-{
-	COORD Coor = { 2, 2 };
-	DWORD dw;
-
-	//  화면 지우기	
-	FillConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), ' ', 10*2, Coor, &dw);
-	Coor.X = 3;
-	Coor.Y = 3;
-	FillConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), ' ', 10*2, Coor, &dw);
-
 }

@@ -13,26 +13,7 @@ void main()
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	init();
-	//gameInit();
 	//getBackup();
-	//printMap();
-
-	//int x = 8;
-	//int y = 5;
-
-	//printStone();
-	//if (isTherePlacePutBlack()) {
-	//	gotoxy(0, 45);
-	//	//printf("END!!");
-	//	printf("yes");
-	//}
-	//else {
-	//	gotoxy(0, 45);
-	//	//printf("NOT END...");
-	//	printf("no");
-
-	//}
-	getBackup();
-	gamePrompt(false);
+	gamePrompt(true);
 
 }

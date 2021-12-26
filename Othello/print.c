@@ -100,18 +100,16 @@ void printStone()
 
 	for (i = 1; i <= 8 ; i++) {
 		for (j = 1; j <= 8; j++) {
-			if (g_map[i][j] == PLAYER1 || g_map[i][j] == PLAYER2) {
-
-				gotoxy(base_x + (j-1) * dx, base_y + (i-1) * dy);
-				if (g_map[i][j] == 1)
-					printf("●");
-				else if (g_map[i][j] == 2)
-					printf("○");
-				//else if (g_map[i + 1][j + 1] == 0)
-				//	continue;
-				else
-					printf("＃");  //  avoid case
-			}
+			gotoxy(base_x + (j-1) * dx, base_y + (i-1) * dy);
+			if (g_map[i][j] == 1)
+				printf("○"); 
+			else if (g_map[i][j] == 2)
+				printf("●");
+			else if (g_map[i][j] == 0)
+				continue;
+			else
+				printf("＃");  //  avoid case
+			
 		}
 	}
 	gotoxy(0, 45);	// 프로세스 종료 시 나오는 문구 처리를 위해 커서를 옮김
@@ -126,15 +124,15 @@ void printSpecificStone(int _a, int _b) {
 	gotoxy(base_x + _b * dx, base_y + _a * dy);  // 배열의 인덱스 적용을 위해 뒤집기
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
 	if (g_map[_a][_b] == 1)
-		printf("●");
-	else if (g_map[_a][_b] == 2)
 		printf("○");
+	else if (g_map[_a][_b] == 2)
+		printf("●");
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 	
 	gotoxy(0, 45); // 프로세스 종료 시 나오는 문구 처리를 위해 커서를 옮김
 }
 
-void printEndMsg(int _playtime, int _p1_score, int _p2_score)
+void printEndMsg(int _p1_score, int _p2_score)
 {
 	int margin_top = 18;
 	int margin_left = 35;
@@ -175,10 +173,10 @@ void printEndMsg(int _playtime, int _p1_score, int _p2_score)
 	printf("%s", comment);
 	
 	gotoxy(margin_left + 7, base_line + 6);
-	if (_playtime >= 60 * 60) 
+	if (g_playtime >= 60 * 60) 
 		printf("playtime : %dm %ds", 59, 59);
 	else
-		printf("playtime : %dm %ds", _playtime / 60, _playtime % 60);
+		printf("playtime : %dm %ds", g_playtime / 60, g_playtime % 60);
 
 
 	gotoxy(margin_left + 7, base_line + 8);
@@ -242,10 +240,10 @@ void printSubmenu(boolean _black_turn, int _p1_score, int _p2_score) {
 	int margin_top = 8;
 
 	gotoxy(margin_left, CONSOLE_HEIGHT / 2 ); // 흑 스코어 출력
-	printf("● %d",_p1_score);
+	printf("○ %d",_p1_score);
 	
 	gotoxy(CONSOLE_WIDTH - margin_left - 2 , CONSOLE_HEIGHT / 2 ); // 백 스코어 출력
-	printf("○ %d",_p2_score);
+	printf("● %d",_p2_score);
 	
 	gotoxy(CONSOLE_WIDTH / 2 - 5, margin_top - 3 ); // 현재 진행중인 플레이어 출력
 		if (_black_turn)

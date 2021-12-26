@@ -62,9 +62,9 @@ void start()
 }
 void gamePrompt(bool _is_newgame)
 {
-	int time_limit = 3;
 	int x = 0, y = 0;
 	int a = 0, b = 0;
+	int p1_score = 0, p2_score = 0;
 	char* situation = "";
 	int* status_time, * status_mouse;
 	pthread_t th_time_id, th_mouse_id;
@@ -76,7 +76,8 @@ void gamePrompt(bool _is_newgame)
 	time_t start_clock = clock();
 	
 	while (!isGameEnd()) {
-		int p1_score, p2_score;
+		p1_score = 0;
+		p2_score = 0;
 		COORD Coor = { 0, 0 };
 		DWORD dw;
 		//  화면 지우기	
@@ -94,7 +95,6 @@ void gamePrompt(bool _is_newgame)
 			printf("There's no place to put BLACK stones.");
 			gotoxy(0, 1);
 			printf("Turn Over");
-			g_is_black_turn = !g_is_black_turn;
 			Sleep(1000);
 			continue;
 		}
@@ -103,7 +103,6 @@ void gamePrompt(bool _is_newgame)
 			printf("There's no place to put WHITE stones.");
 			gotoxy(0, 1);
 			printf("Turn Over");
-			g_is_black_turn = !g_is_black_turn;
 			Sleep(1000);
 			continue;
 		}
@@ -122,7 +121,7 @@ void gamePrompt(bool _is_newgame)
 		while (true) {
 			//  제한시간 초과하는 경우
 			if (g_time_th_end) {
-				//g_time_th_end = false;
+				g_time_th_end = false;
 				pthread_cancel(th_mouse_id);
 				pthread_join(th_time_id, (void**)&status_time);
 				//free(status_time);  메모리 해제할 것이 없음
@@ -133,14 +132,11 @@ void gamePrompt(bool _is_newgame)
 			if (g_mouse_th_end) {
 				g_mouse_th_end = false;
 				pthread_join(th_mouse_id, (void**)&status_mouse);
-				//x = ((int*)status_mouse)[0];
-				//y = ((int*)status_mouse)[1];
-				//free(status_mouse);
 				Pos* temp;
 				temp = (Pos*)status_mouse;
 				x = temp->a;
 				y = temp->b;
-
+				
 				//  나가기 버튼이라면
 				if (isBtnExit(x, y)) {
 					pthread_cancel(th_time_id);
@@ -148,7 +144,7 @@ void gamePrompt(bool _is_newgame)
 					break;
 				}
 
-				// 판안에 없다면
+				// 판 안에 없다면
 				if (!coordToIndex(x, y, &a, &b)) {
 					if (pthread_create(&th_mouse_id, NULL, threadMouse, NULL) < 0) {
 						perror("mouse thread create error:");
@@ -156,29 +152,33 @@ void gamePrompt(bool _is_newgame)
 					}
 					continue;
 				}
-
-				if (isPossiblePos(a, b)) {
+				else if (isPossiblePos(a, b)) {
 					pthread_cancel(th_time_id);
-					//pthread_join(th_time_id, (void**)&status_time);
+					
 					situation = "progress";
 					break;
 				}
+				else {
+					if (pthread_create(&th_mouse_id, NULL, threadMouse, NULL) < 0) {
+						perror("mouse thread create error:");
+						exit(0);
+					}
+					continue;
+
+				}
 
 			}
+
 		}
 		if (strcmp(situation, "timeout") == 0) {
-			printf("ttttttttttttttttttttttttt");
 			putRandomStone(&a, &b);
 			flipStone(a, b);
 			printSpecificStone(a, b);
 			gotoxy(0, 0);
 			printf("The position of the stone has been randomly selected.");
-			Sleep(1000);
+			Sleep(2000);
 		}
 		else if (strcmp(situation, "progress") == 0) {
-			//  pos 변수를 이용하여 x, y좌표에 해당하는 위치에 돌 추가
-			//  주변 돌 뒤집기
-			printf("ppppppppppppppppppppppppp");
 			putStone(a, b);
 			flipStone(a, b);
 		}
@@ -187,16 +187,19 @@ void gamePrompt(bool _is_newgame)
 			return;
 		}
 		else {
-			printf("eeeeeeeeeeeeeeeee");
 		}
 		
 	}
 
-	gotoxy(1, 1);
-	printf("GAME END");
-		//  종료 버튼 눌렀을 때 end_clock - start_clock + g_playtime이 총 게임시간임
+	printStone();
+	getScore(&p1_score, &p2_score);
 
+	printSubmenu(!g_is_black_turn, p1_score, p2_score);
+	time_t end_clock = clock();
 
+	g_playtime = g_playtime + (end_clock - start_clock)/1000;
+
+	endPrompt();
 }
 
 void savePrompt()
@@ -209,4 +212,9 @@ void recordPrompt()
 
 void endPrompt()
 {
+	int p1_score = 0, p2_score = 0;
+	getScore(&p1_score, &p2_score);
+	printEndMsg(p1_score, p2_score);
+
+	//  마우스 입력 대기 ok버튼 클릭 할 경우 save프롬프트로 이동
 }

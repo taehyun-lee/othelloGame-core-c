@@ -128,4 +128,3 @@ bool isbtnOk(int _x, int _y);
 */
 int whichBtnSelect(int _x, int _y);
 
-void screenClear();
